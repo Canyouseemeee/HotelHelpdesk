@@ -87,7 +87,8 @@ class TypeIssuesController extends Controller
     {
         $typeissues = Typeissues::find($request->Typeissuesid);
         $typeissues->Status = $request->Status;
-        $typeissues->save();
+        $typeissues->update();
+        // printf($request->Typeissuesid);
         return response()->json(['success' => 'Status Change successfully']);
     }
 }

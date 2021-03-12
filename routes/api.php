@@ -22,7 +22,7 @@ Route::post('/login-ad','AuthController@loginad');
 Route::get('/issues-closed','Admin\ApiController@Closed');
 Route::get('/issues-new','Admin\ApiController@New');
 Route::get('/issues-progress','Admin\ApiController@Progress');
-// Route::get('/appointments','Admin\ApiController@Appointments');
+Route::post('/issues-getissuesuser','Admin\ApiController@Getissuesuser');
 
 // Route::post('/appointmentlist','Admin\ApiController@Appointmentlist');
 Route::post('/commentlist','Admin\ApiController@Commentlist');

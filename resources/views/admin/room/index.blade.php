@@ -131,7 +131,7 @@ Web Test
     $.ajax({
         type:'GET',
         dataType:'json',
-        url:'{{route("change_Status")}}',
+        url:'{{route("change_StatusRoom")}}',
         data:{'Status':Status,'Roomid':Roomid},
         success:function(data){
             $('.message').html('<p class="alert alert-danger">'+data.success+'</p>');

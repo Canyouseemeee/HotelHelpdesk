@@ -89,6 +89,7 @@ class ApiController extends Controller
             ->join('users', 'htissues.Assignment', '=', 'users.id')
             ->join('issues_logs', 'htissues.Issuesid', '=', 'issues_logs.Issuesid')
             ->where([['htissues.Statusid', 2], ['issues_logs.Action', 'Closed']])
+            ->groupBy('htissues.Issuesid')
             ->orderBy('htissues.Issuesid', 'DESC')
             ->get();
 
@@ -104,7 +105,7 @@ class ApiController extends Controller
             ->join('room', 'htissues.Roomid', '=', 'room.Roomid')
             ->join('typeissues', 'htissues.Typeissuesid', '=', 'typeissues.Typeissuesid')
             ->join('users', 'htissues.Assignment', '=', 'users.id')
-            ->where([['htissues.Statusid', 1], ['htissues.Date_In', now()->toDateString()]])
+            ->where('htissues.Statusid', 1)
             ->orderBy('Issuesid', 'DESC')
             ->get();
         return response()->json($htissues);
@@ -150,11 +151,28 @@ class ApiController extends Controller
             ->join('typeissues', 'htissues.Typeissuesid', '=', 'typeissues.Typeissuesid')
             ->join('users', 'htissues.Assignment', '=', 'users.id')
             ->join('issues_logs', 'htissues.Issuesid', '=', 'issues_logs.Issuesid')
-            ->where([['htissues.Statusid', 6], ['issues_logs.Action', 'Updated']])
+            ->where([['htissues.Statusid', 3], ['issues_logs.Action', 'Updated']])
             ->groupBy('htissues.Issuesid')
             ->orderBy('Issuesid', 'DESC')
             ->get();
 
+        return response()->json($htissues);
+    }
+
+    public function Getissuesuser(Request $request)
+    {
+        $_iduser = $request->input('iduser');
+        $htissues = DB::table('htissues')
+            ->select('Issuesid', 'NoRoom', 'ISSName', 'Typename', 'users.name as Assignment', 'htissues.Subject', 'htissues.Description', 
+            'htissues.Createby', 'htissues.Updatedby', 'htissues.created_at', 'htissues.updated_at')
+            ->join('issues_status', 'htissues.Statusid', '=', 'issues_status.Statusid')
+            ->join('room', 'htissues.Roomid', '=', 'room.Roomid')
+            ->join('typeisaasues', 'htissues.Typeissuesid', '=', 'typeissues.Typeissuesid')
+            ->join('users', 'htissues.Assignment', '=', 'users.id')
+            ->where([['htissues.Date_In', now()->toDateString()],['htissues.Assignment',$_iduser]])
+            ->whereIn('htissues.Statusid',array(1,3))
+            ->orderBy('Issuesid', 'DESC')
+            ->get();
         return response()->json($htissues);
     }
 

@@ -72,7 +72,7 @@ class RoomController extends Controller
         return redirect('/room')->with('danger','Your room is Deleted');
     }
 
-    public function changStatus(Request $request)
+    public function changStatusRoom(Request $request)
     {
         $room = Room::find($request->Roomid);
         $room->Status = $request->Status;

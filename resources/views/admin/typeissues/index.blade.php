@@ -59,7 +59,7 @@ Web Test
                             <input type="hidden" class="departmentdelete_val" value="{{$row->Typeissuesid}}">
                             <td>{{$row->Typeissuesid}}</td>
                             <td>{{$row->Typename}}</td>
-                            <td><input type="checkbox" class="toggle-class" data-id="{{$row->Typeissuesid}}" 
+                            <td><input type="checkbox" class="toggle-class" data-id2="{{$row->Typeissuesid}}" 
                             data-toggle="toggle" data-on="Enabled" data-off="Disabled" {{$row->Status==true ? 'checked':''}}></td>
                             <td>
                                 <a href="{{ url('typeissues-edit/'.$row->Typeissuesid) }}" class="btn btn-success">EDIT</a>
@@ -95,8 +95,8 @@ Web Test
   });
 
   $('.toggle-class').on('change',function(){
-    var DmStatus=$(this).prop('checked')==true ? 1:0;
-    var Departmentid=$(this).data('id');
+    var Status=$(this).prop('checked')==true ? 1:0;
+    var Typeissuesid=$(this).data('id2');
     // alert(Departmentid);
     $.ajax({
         type:'GET',

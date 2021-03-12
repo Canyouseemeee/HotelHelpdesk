@@ -307,7 +307,7 @@ function DateTime($strDate)
 
                                 <div class="form-group col-md-4">
                                     <b> <label>SPEND TIME : </label></b>
-                                    @if($data->Statusid === 1 || $data->Statusid === 6)
+                                    @if($data->Statusid === 1 || $data->Statusid === 3)
                                     <label>ยังไม่ปิดงาน</label>
                                     @else
                                     <label>{{($dateinterval)->format('%d วัน %H:%I:%S น.')}}</label>

@@ -40,11 +40,12 @@ class AuthController extends Controller
         $logintype = 0;
         foreach ($userinfo as $uinfo) {
             // echo $uinfo->name;
-            $isuser = 1;
+            $id = $uinfo->id;
             $logintype = $uinfo->logintype;
             $name = $uinfo->name;
             $teamid = $uinfo->teamid;
             $usertype = $uinfo->usertype;
+            $image = $uinfo->image;
             $userprofile = array("id" => $uinfo->id, "logintype" => $logintype);
         }
         if($teamid == 1){
@@ -67,6 +68,8 @@ class AuthController extends Controller
                     'usertype' => $usertype,
                     'input' => $username,
                     'name' => $name,
+                    'id'=> $id,
+                    'image' => $image,
                     'expires_at' => $expires_at
                 ]);
             }
@@ -79,6 +82,8 @@ class AuthController extends Controller
                     'usertype' => $usertype,
                     'input' => $username,
                     'name' => $name,
+                    'id'=> $id,
+                    'image' => $image,
                     'expires_at' => $expires_at
                 ]);
             }

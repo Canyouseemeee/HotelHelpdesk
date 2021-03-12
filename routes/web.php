@@ -168,7 +168,7 @@ Route::post('/room-store', 'Admin\RoomController@store');
 Route::get('/room-edit/{id}', 'Admin\RoomController@edit');
 Route::put('/room-update/{id}', 'Admin\RoomController@update');
 Route::delete('/room-delete/{id}', 'Admin\RoomController@delete');
-Route::get('/changStatus', 'Admin\RoomController@changStatus')->name('change_Status');
+Route::get('/changStatusRoom', 'Admin\RoomController@changStatusRoom')->name('change_StatusRoom');
 
 //status//
 Route::get('/status', 'Admin\StatusController@index');
