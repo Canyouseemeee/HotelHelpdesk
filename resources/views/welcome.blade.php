@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>HOTEL HELPDESK</title>
+    <title>HMS SERVICE</title>
 
     <!-- Fonts -->
     <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
@@ -82,14 +82,14 @@
             @else
             <a href="{{ route('login') }}">Login</a>
 
-            <a href="{{url('/apk/1.0.5.apk')}}">Dowload App</a>
+            <!-- <a href="{{url('/apk/1.0.5.apk')}}">Dowload App</a> -->
             @endauth
         </div>
         @endif
 
         <div class="content">
             <div class="title m-b-md">
-                HOTEL:HELPDESK
+            HMS SERVICE
             </div>
         </div>
     </div>

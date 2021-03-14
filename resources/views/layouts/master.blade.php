@@ -35,11 +35,11 @@
     <ul class="navbar-nav bg-gray-800 sidebar sidebar-dark accordion" id="accordionSidebar">
 
       <!-- Sidebar - Brand -->
-      <a class="sidebar-brand d-flex align-items-center justify-content-center" href="/dashboard">
+      <a class="sidebar-brand d-flex align-items-center justify-content-center" href="/issues">
         <div class="sidebar-brand-icon rotate-n-10">
           <i class="fas fa-fw fa-wrench"></i>
         </div>
-        <div class="sidebar-brand-text mx-3">HT HelpDesk</div>
+        <div class="sidebar-brand-text mx-3">HMS SERVICE</div>
       </a>
 
       <!-- Divider -->
@@ -144,7 +144,7 @@
             <i class="fa fa-bars"></i>
           </button>
 
-          <div class="text-white mx-3">HOTEL HELPDESK</div>
+          <div class="text-white mx-3">HMS SYSTEM</div>
 
           <!-- Topbar Navbar -->
           <ul class="navbar-nav ml-auto">

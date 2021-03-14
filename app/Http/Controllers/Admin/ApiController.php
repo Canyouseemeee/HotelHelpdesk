@@ -299,15 +299,16 @@ class ApiController extends Controller
             $file = time() . '.' . $filename;
             $comment->Image = $request->image->storeAs('images', $file, 'public');
             // dd($file);
+            // echo($file);
         } else {
             $comment->Image = null;
         }
 
         $comment->save();
 
-        return response()->json([
-            'status' => 'success'
-        ]);
+        return response()->json(
+            // 'status' => 'success'
+        );
     }
 
     public function postStatusComment(Request $request)

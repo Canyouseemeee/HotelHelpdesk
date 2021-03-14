@@ -53,8 +53,10 @@ Route::get('/success', 'User\CreateuserController@success');
 
     //History Logs
     Route::get('/history', 'Admin\LogsController@index');
-
     Route::get('/checkin-checkout', 'Admin\CheckinCheckoutController@index');
+
+    Route::get('/history-user', 'User\LogsController@index');
+    Route::get('/checkin-checkout-user', 'User\CheckinCheckoutController@index');
 
 
     //issues//
@@ -104,8 +106,8 @@ Route::get('/success', 'User\CreateuserController@success');
 
 Route::group(['middleware' => ['auth']], function () {
     // DashboardUser
-    Route::get('/dashboarduser', 'User\DashboardController@index');
-    Route::post('/dashboarduser-between', 'User\DashboardController@getReport');
+    // Route::get('/dashboarduser', 'User\DashboardController@index');
+    // Route::post('/dashboarduser-between', 'User\DashboardController@getReport');
 
     //Historyuser Logs
     Route::get('/historyuser', 'User\LogsController@index');

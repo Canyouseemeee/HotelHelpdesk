@@ -9,7 +9,7 @@
   <meta name="description" content="">
   <meta name="author" content="">
 
-  <title>CNMI HELPDESK</title>
+  <title>HMS SERVICE</title>
 
   <!-- Custom fonts for this template-->
   <link href="/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -36,27 +36,25 @@
     <ul class="navbar-nav bg-gray-800 sidebar sidebar-dark accordion" id="accordionSidebar">
 
       <!-- Sidebar - Brand -->
-      <a class="sidebar-brand d-flex align-items-center justify-content-center" href="/dashboarduser">
+      <a class="sidebar-brand d-flex align-items-center justify-content-center" href="/issues-user">
         <div class="sidebar-brand-icon rotate-n-10">
           <i class="fas fa-fw fa-wrench"></i>
         </div>
-        <div class="sidebar-brand-text mx-3">HD HelpDesk</div>
+        <div class="sidebar-brand-text mx-3">HMS SERVICE</div>
       </a>
 
       <!-- Divider -->
       <hr class="sidebar-divider my-0">
 
       <!-- Nav Item - Dashboard -->
-      <li class="{{ 'dashboarduser' == request()->path() ? 'active' : '' }} nav-item ">
-        <a class="nav-link" href="/dashboarduser">
+      <!-- <li class="nav-item">
+        <a class="nav-link" href="/dashboard">
           <i class="fas fa-fw fa-tachometer-alt"></i>
           <span>Dashboard</span></a>
-      </li>
+      </li> -->
 
       <!-- Nav Item - Pages Collapse Menu -->
-      <li class="{{ 'issues-user' == request()->path() ? 'active' : '' }}
-      {{ 'defer-user' == request()->path() ? 'active' : '' }}
-      {{ 'closed-user' == request()->path() ? 'active' : '' }} nav-item ">
+      <li class="nav-item">
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
           <i class="fas fa-fw fa-table"></i>
           <span>Issues</span>
@@ -65,32 +63,64 @@
           <div class="bg-white py-2 collapse-inner rounded">
             <!-- <h6 class="collapse-header">Custom Components:</h6> -->
             <a class="collapse-item" href="/issues-user">New Issues</a>
-            <a class="collapse-item" href="/defer-user">Defer Issues</a>
+            <a class="collapse-item" href="/progress-user">Progress Issues</a>
             <a class="collapse-item" href="/closed-user">Closed Issues</a>
           </div>
         </div>
       </li>
 
-      <li class="{{ 'historyuser' == request()->path() ? 'active' : '' }} nav-item ">
-        <a class="nav-link" href="/historyuser">
+      <li class="{{ 'history' == request()->path() ? 'active' : '' }} nav-item ">
+        <a class="nav-link" href="/history-user">
           <i class="fas fa-fw fa-cog"></i>
-          <span>History</span></a> 
+          <span>History</span></a>
       </li>
 
-      <li class="{{ 'checkin-checkout-user' == request()->path() ? 'active' : '' }} nav-item ">
+      <li class="{{ 'checkin-checkout' == request()->path() ? 'active' : '' }} nav-item ">
         <a class="nav-link" href="/checkin-checkout-user">
         <i class="fas fa-fw fa-clipboard-check"></i>
           <span>Checkin-Checkout</span></a>
       </li>
 
-      <li class="{{ 'calendar-user' == request()->path() ? 'active' : '' }} nav-item ">
+      <li class="{{ 'calendar' == request()->path() ? 'active' : '' }} nav-item ">
         <a class="nav-link" href="/calendar-user">
           <i class="fas fa-fw fa-calendar"></i>
-          <span>Calendar</span></a> 
+          <span>Calendar</span></a>
       </li>
 
       <!-- Divider -->
       <hr class="sidebar-divider">
+
+      <!-- Heading -->
+      <!-- <div class="sidebar-heading">
+        Interface
+      </div> -->
+
+      <!-- <li class="{{ 'role-register' == request()->path() ? 'active' : '' }} nav-item ">
+        <a class="nav-link" href="/role-register">
+          <i class="fas fa-fw fa-folder"></i>
+          <span>UserManagement</span></a>
+      </li> -->
+
+      <!-- Nav Item -->
+      <!-- <li class="nav-item">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities" aria-expanded="true" aria-controls="collapseUtilities">
+          <i class="fas fa-fw fa-wrench"></i>
+          <span>Category</span>
+        </a>
+        <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
+          <div class="bg-white py-2 collapse-inner rounded"> -->
+            <!-- <h6 class="collapse-header">Custom Utilities:</h6> -->
+            <!-- <a class="collapse-item" href="/tracker">Tracker</a> -->
+            <!-- <a class="collapse-item" href="/room">Room</a>
+            <a class="collapse-item" href="/status">Status</a>
+            <a class="collapse-item" href="/typeissues">TypeIssues</a>
+            <a class="collapse-item" href="/device">Device</a>
+          </div>
+        </div>
+      </li> -->
+
+      <!-- <-- Divider --> 
+      <!-- <hr class="sidebar-divider"> -->
 
 
       <!-- Sidebar Toggler (Sidebar) -->
@@ -115,7 +145,7 @@
             <i class="fa fa-bars"></i>
           </button>
 
-          <div class="text-white mx-3">CNMI RAMATHIBODI</div>
+          <div class="text-white mx-3">HMS SERVICE</div>
 
           <!-- Topbar Navbar -->
           <ul class="navbar-nav ml-auto">

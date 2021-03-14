@@ -1,4 +1,4 @@
-@extends('layouts.masteruser')
+@extends('layouts.master')
 
 @section('title')
 Web Test
@@ -22,7 +22,7 @@ function DateThai($strDate)
 ?>
 
 <div class="card-body">
-    <form action="{{ url('issues-filter-defers-user') }}" method="post">
+    <form action="{{ url('issues-filter-progress') }}" method="post">
         {{ csrf_field() }}
         <div class="container">
             <div class="row justify-content-center">
@@ -49,7 +49,7 @@ function DateThai($strDate)
                                 <label class="col-form-label text-md-right float-left"> Fromdate : {{$fromdate}} - Todate : {{$todate}} is quantity {{$data}} </label>
                                 @endif
                                 <button type="submit" class="btn btn-primary float-right">Search</button>
-                                <a href="#" class="btn btn-danger float-right">Reset</a>
+                                
                             </div>
                         </div>
                     </div>
@@ -62,8 +62,8 @@ function DateThai($strDate)
     <div class="col-md-12">
         <div class="card">
             <div class="card-header py-3 ">
-                <h4 class="card-title"> Defer Issues
-                    <a href="{{ url('issues-create-user/'.$Uuidapp) }}" class="btn btn-primary float-right">Add Issues</a>
+                <h4 class="card-title"> Progress Issues
+                    <a href="{{ url('issues-create/'.$Uuidapp) }}" class="btn btn-primary float-right">Add Issues</a>
                 </h4>
             </div>
             <style>
@@ -78,34 +78,30 @@ function DateThai($strDate)
             </style>
             <div class="card-body">
                 <div class="table-responsive">
-                    <table id="datatable" class="table">
+                    <table class="table " id="datatable" width="100%" cellspacing="0">
                         <thead class="text-primary">
                             <th class="w-10p">Id</th>
-                            <th class="w-10p">Tracker</th>
                             <th class="w-10p">Status</th>
-                            <th class="w-10p">Priority</th>
                             <th class="w-10p">Createby</th>
                             <th class="w-10p">Subject</th>
                             <th class="w-10p">Updated</th>
                             <th class="w-10p">Views</th>
                         </thead>
-                        @if (!is_null($issues))
+                        @if (!is_null($htissues))
                         <tbody>
-                            @foreach($issues as $row)
+                            @foreach($htissues as $row)
                             <tr>
                                 <td>{{$row->Issuesid}}</td>
-                                <td>{{$row->TrackName}}</td>
                                 <td>{{$row->ISSName}}</td>
-                                <td>{{$row->ISPName}}</td>
                                 <td>{{$row->Createby}}</td>
                                 <td>
                                     <div class="w-11p" style="height: 30px; overflow: hidden;">
-                                        <a href="{{ url('issues-show-user/'.$row->Issuesid) }}">{{$row->Subject}}</a>
+                                        <a href="{{ url('issues-show/'.$row->Issuesid) }}">{{$row->Subject}}</a>
                                     </div>
                                 </td>
                                 <td>{{DateThai($row->updated_at)}}</td>
                                 <td>
-                                    <a href="{{ url('issues-show-user/'.$row->Issuesid) }}" class="btn btn-success">View</a>
+                                    <a href="{{ url('issues-show/'.$row->Issuesid) }}" class="btn btn-success">View</a>
                                 </td>
                             </tr>
                             @endforeach
@@ -120,12 +116,12 @@ function DateThai($strDate)
                                 <td style="text-align:center">{{$betweens->Createby}}</td>
                                 <td>
                                     <div class="w-11p" style="height: 30px; overflow: hidden;">
-                                        <a href="{{ url('issues-show-user/'.$betweens->Issuesid) }}">{{$betweens->Subject}}</a>
+                                        <a href="{{ url('issues-show/'.$betweens->Issuesid) }}">{{$betweens->Subject}}</a>
                                     </div>
                                 </td>
                                 <td style="text-align:center">{{DateThai($betweens->updated_at)}}</td>
                                 <td>
-                                    <a href="{{ url('issues-show-user/'.$betweens->Issuesid) }}" class="btn btn-success">View</a>
+                                    <a href="{{ url('issues-show/'.$betweens->Issuesid) }}" class="btn btn-success">View</a>
                                 </td>
                             </tr>
                             @endforeach

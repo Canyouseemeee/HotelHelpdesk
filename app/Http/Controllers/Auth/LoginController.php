@@ -102,7 +102,7 @@ class LoginController extends Controller
                     if (Auth::user()->usertype == 'admin') {
                         return redirect()->intended('issues');
                     } else if (Auth::user()->usertype == 'user') {
-                        return redirect()->intended('dashboarduser');
+                        return redirect()->intended('issues-user');
                     } else{
                         return redirect()->back();
                     }
@@ -112,9 +112,9 @@ class LoginController extends Controller
                 // print_r($credentials);
                 if (Auth::attempt($credentials)) {
                     if (Auth::user()->usertype == 'admin') {
-                        return redirect()->intended('dashboard');
+                        return redirect()->intended('issues');
                     } else if (Auth::user()->usertype == 'user') {
-                        return redirect()->intended('dashboarduser');
+                        return redirect()->intended('issues-user');
                     }else{
                         return redirect()->back();
                     }
