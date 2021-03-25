@@ -44,19 +44,29 @@ Web Test
                     <a href="{{ url('department-create') }}" class="btn btn-primary float-right">เพิ่มข้อมูลแผนก</a>
                 </h4>
             </div>
+            <style type="text/css">
+                body {
+                    counter-reset: mycount;           /* Set the counter to 0 */
+                }
+                .mycount:before{
+                    counter-increment: mycount;      /* Increment the counter */
+                    content: counter(mycount) ". "; /* Display the counter */
+                }
+                .test {text-align: center;}
+            </style>
             <div class="card-body">
                 <table id="datatable" class="table">
                     <thead class="text-primary">
-                        <th>ไอดี</th>
-                        <th>แผนก</th>
+                        <th class="test">ลำดับ</th>
+                        <th class="test">ชื่อแผนก</th>
                         <!-- <th>สถานะ</th> -->
-                        <th>แก้ไข</th>
+                        <th class="test">แก้ไข</th>
                         <!-- <th>DELETE</th> -->
                     </thead>
                     <tbody>
                         @foreach($department as $row)
                         <tr>
-                            <td>{{$row->departmentid}}</td>
+                            <td class="test">{{$row->departmentid}}</td>
                             <td>{{$row->dmname}}</td>
                             <!-- <td><input type="checkbox" class="toggle-class" data-id2="{{$row->departmentid}}" 
                             data-toggle="toggle" data-on="Enabled" data-off="Disabled" {{$row->Status==true ? 'checked':''}}></td> -->

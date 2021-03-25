@@ -52,6 +52,7 @@ Route::get('/success', 'User\CreateuserController@success');
     Route::get('/role-reset/{id}', 'Admin\RoleController@registerreset');
     Route::put('/role-reset-password/{id}', 'Admin\RoleController@registerresetpassword');
     Route::put('/role-register-update/{id}', 'Admin\RoleController@registerupdate');
+    Route::delete('/role-delete/{id}', 'Admin\RoleController@delete');
 
     //History Logs
     Route::get('/history', 'Admin\LogsController@index');

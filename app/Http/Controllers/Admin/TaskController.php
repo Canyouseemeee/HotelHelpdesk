@@ -258,6 +258,7 @@ class TaskController extends Controller
         // $issues->Comname = $request->input('Comname');
         // $issues->Informer = $request->input('Informer');
         $task->description = $request->input('description');
+        $task->date_in = DateThai(now()->toDateString());
         $task->assign_date = $request->input('assign_date');
         $task->due_date = DateThai($request->input('due_date'));
         $task->close_date = null;

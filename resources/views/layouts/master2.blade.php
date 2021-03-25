@@ -40,7 +40,7 @@
         <div class="sidebar-brand-icon rotate-n-10">
           <i class="fas fa-fw fa-wrench"></i>
         </div>
-        <div class="sidebar-brand-text mx-3">WORKFROMHOME</div>
+        <div class="sidebar-brand-text mx-3">WORK FROM HOME</div>
       </a>
 
       <!-- Divider -->

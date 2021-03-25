@@ -74,6 +74,9 @@ Route::post('/postretask','Admin\ApiController@postretask');
 Route::post('/gethistoryassigntask','Admin\ApiController@gethistoryassigntask');
 Route::post('/gethistorybetweenassigntask','Admin\ApiController@gethistorybetweenassigntask');
 
+Route::post('/gethistoryassignsolve','Admin\ApiController@gethistoryassignsolve');
+Route::post('/gethistorybetweenassignsolve','Admin\ApiController@gethistorybetweenassignsolve');
+
 Route::post('/countsolvework','Admin\ApiController@countsolvework');
 Route::post('/getsolvework','Admin\ApiController@getsolvework');
 Route::post('/updatesolve','Admin\ApiController@updatesolve');

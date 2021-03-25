@@ -36,8 +36,17 @@ class RoleController extends Controller
         $user->logintype = $request->input('logintype');
         $user->username = $request->input('username');
         $user->password = Hash::make($request->input('password'));
-        $user->latitude = $request->input('latitude');
-        $user->longitude = $request->input('longitude');
+        if($request->input('latitude') == null){
+            $user->latitude = null;
+        }else{
+            $user->latitude = $request->input('latitude');
+        }
+        if($request->input('longitude') == null){
+            $user->longitude = null;
+        }else{
+            $user->longitude = $request->input('longitude');
+        }
+
         if ($request->hasFile('Image')) {
             $filename = $request->Image->getClientOriginalName();
             $file = time() . '.' . $filename;
@@ -87,6 +96,14 @@ class RoleController extends Controller
         $users->update();
 
         return redirect('/role-register')->with('status','อัพเดทข้อมูลพนักงงานสำเร็จ');
+    }
+
+    public function delete($id)
+    {
+        $users = User::findOrFail($id);
+        $users->delete();
+        // Session::flash('statuscode', 'error');
+        return redirect()->with('danger', 'ลบข้อมูลพนักงงานสำเร็จ');
     }
 
     public function registerreset(Request $request, $id){

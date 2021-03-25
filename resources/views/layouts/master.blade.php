@@ -9,7 +9,7 @@
   <meta name="description" content="">
   <meta name="author" content="">
 
-  <title>WORKFROMHOME</title>
+  <title>WORK FROM HOME</title>
 
   <!-- Custom fonts for this template-->
   <link href="/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -39,7 +39,7 @@
         <div class="sidebar-brand-icon rotate-n-10">
           <i class="fas fa-fw fa-wrench"></i>
         </div>
-        <div class="sidebar-brand-text mx-3">WORKFROMHOME</div>
+        <div class="sidebar-brand-text mx-3">WORK FROM HOME</div>
       </a>
 
       <!-- Divider -->
@@ -143,7 +143,7 @@
             <i class="fa fa-bars"></i>
           </button>
 
-          <div class="text-white mx-3">WORKFROMHOME</div>
+          <div class="text-white mx-3">WORK FROM HOME</div>
 
           <!-- Topbar Navbar -->
           <ul class="navbar-nav ml-auto">

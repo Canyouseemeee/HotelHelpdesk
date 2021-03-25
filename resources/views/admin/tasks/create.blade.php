@@ -55,7 +55,7 @@ function DateThai($strDate)
                         </div>
 
                         <div class="form-group col-md-3">
-                            <label for="title">แผนก</label>
+                            <label for="title">แผนก</label><label style="color: red">†จำเป็น</label>
                             <select id="department" name="department" class="form-control formselect required">
                                 <option value="0">--- เลือก แผนก ---</option>
                             @foreach ($department as $key)
@@ -65,7 +65,7 @@ function DateThai($strDate)
                         </div>
 
                         <div class="form-group col-md-3">
-                            <label>หมอบหมายให้</label>
+                            <label>หมอบหมายให้</label><label style="color: red">†จำเป็น</label>
                             <select id="assignment" name="assignment" class="form-control formselect  create" require>
                             <!-- <option value="">--- เลือก พนักงาน ---</option>
                             @foreach ($user as $key)
@@ -78,17 +78,17 @@ function DateThai($strDate)
                     </div>
 
                     <div class="form-group">
-                        <label>หัวเรื่อง</label>
+                        <label>หัวเรื่อง</label><label style="color: red">†จำเป็น</label>
                         <input type="text" name="subject" class="form-control" placeholder="กรอกหัวเรื่อง" value="{{old('subject')}}">
                     </div>
 
                     <div class="form-group">
-                        <label>รายละเอียด</label>
+                        <label>รายละเอียด</label><label style="color: red">†จำเป็น</label>
                         <textarea type="text" name="description" class="form-control" placeholder="กรอกรายละเอียด">{{old('description')}}</textarea>
                     </div>
 
                     <div class="form-group">
-                        <label>วันจะให้ที่ส่ง</label>
+                        <label>วันจะให้ที่ส่ง</label><label style="color: red">†จำเป็น</label>
                         <input type="text" class="form-control datetimepicker" id="due_date" name="due_date"> 
                     </div>
                     <br>

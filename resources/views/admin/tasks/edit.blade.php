@@ -21,8 +21,8 @@ function DateThai($strDate)
 
 
 <!-- <div class="btn-group btn-group-toggle" data-toggle="buttons"> -->
-<button type="button" class="btn btn-outline-warning btn_showIssues active">Issues Create</button>
-<button type="button" class="btn btn-outline-primary btn_showComments">Comments</button>
+<!-- <button type="button" class="btn btn-outline-warning btn_showIssues active">Issues Create</button>
+<button type="button" class="btn btn-outline-primary btn_showComments">Comments</button> -->
 <!-- <button type="button" class="btn btn-outline-danger btn_showAppointments">Appointments</button> -->
 <!-- </div> -->
 
@@ -30,7 +30,7 @@ function DateThai($strDate)
     <div class="col-md-12">
         <div class="card">
             <div class="card-header">
-                <h4 class="card-title"> Issues-Edit</h4>
+                <h4 class="card-title"> แก้ไขข้อมูลงาน</h4>
             </div>
             <div class="card-body">
                 @if($errors)
@@ -58,7 +58,7 @@ function DateThai($strDate)
                                 </div>
 
                                 <div class="form-group col-md-3">
-                                    <label for="title">แผนก</label>
+                                    <label for="title">แผนก</label><label style="color: red">†จำเป็น</label>
                                     <select id="department" name="department" class="form-control formselect required">
                                         <option value="0">--- เลือก แผนก ---</option>
                                     @foreach ($department as $key)
@@ -70,7 +70,7 @@ function DateThai($strDate)
                                 </div>
 
                                 <div class="form-group col-md-3">
-                                    <label>หมอบหมายให้</label>
+                                    <label>หมอบหมายให้</label><label style="color: red">†จำเป็น</label>
                                     <select id="assignment" name="assignment" class="form-control formselect  create" require>
                                     <option value="">--- เลือก พนักงาน ---</option>
                                     @foreach ($user as $key)
@@ -83,17 +83,17 @@ function DateThai($strDate)
                         </div>
 
                     <div class="form-group">
-                        <label>หัวเรื่อง</label>
+                        <label>หัวเรื่อง</label><label style="color: red">†จำเป็น</label>
                         <input type="text" name="subject" class="form-control" value="{{$data->subject}}">
                     </div>
 
                     <div class="form-group">
-                        <label>รายละเอียด</label>
+                        <label>รายละเอียด</label><label style="color: red">†จำเป็น</label>
                         <textarea type="text" name="description" class="form-control">{{$data->description}}</textarea>
                     </div>
 
                     <div class="form-group">
-                        <label>วันจะให้ที่ส่ง</label>
+                        <label>วันจะให้ที่ส่ง</label><label style="color: red">†จำเป็น</label>
                         <input type="text" class="form-control datetimepicker" value="{{DateThai($data->due_date)}}" placeholder="{{DateThai($data->due_date)}}" id="due_date" name="due_date" > 
                     </div>
 
@@ -102,8 +102,8 @@ function DateThai($strDate)
                         <input type="file" name="Image">
                     </div> -->
                     <br>
-                    <input type="submit" value="อัพเดท" class="btn btn-primary ">
-                    <a href="{{ url('tasks-show/'.$data->taskid) }}" class="btn btn-danger">กลับ</a>
+                    <input type="submit" value="บันทึก" class="btn btn-primary ">
+                    <a href="{{ url('tasks-show/'.$data->taskid) }}" class="btn btn-danger">ยกเลิก</a>
                 </form>
             </div>
         </div>

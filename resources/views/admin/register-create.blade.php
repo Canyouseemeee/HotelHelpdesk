@@ -12,7 +12,7 @@
                         {{ csrf_field() }}
 
                         <div class="form-group row">
-                            <label for="id" class="col-md-4 col-form-label text-md-right">{{ __('รหัสพนักงาน(เช่น E0001)') }}</label>
+                            <label for="id" class="col-md-5 col-form-label text-md-">{{ __('รหัสพนักงาน') }}<label style="color: red">†จำเป็น</label></label>
 
                             <div class="col-md-6">
                                 <input id="id" type="text" class="form-control @error('id') is-invalid @enderror" name="id" value="{{ old('id') }}" required autocomplete="id" autofocus>
@@ -26,7 +26,7 @@
                         </div>
 
                         <div class="form-group row">
-                            <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('ชื่อ-นามสกุล') }}</label>
+                            <label for="name" class="col-md-5 col-form-label text-md-">{{ __('ชื่อ-นามสกุล') }}<label style="color: red">†จำเป็น</label></label>
 
                             <div class="col-md-6">
                                 <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" required autocomplete="name" autofocus>
@@ -40,7 +40,7 @@
                         </div>
 
                         <div class="form-group row">
-                            <label for="username" class="col-md-4 col-form-label text-md-right">{{ __('ชื่อผู้ใช้') }}</label>
+                            <label for="username" class="col-md-5 col-form-label text-md-">{{ __('ชื่อผู้ใช้') }}<label style="color: red">†จำเป็น</label></label>
 
                             <div class="col-md-6">
                                 <input id="username" type="username" class="form-control @error('username') is-invalid @enderror" name="username" value="{{ old('username') }}" required autocomplete="username">
@@ -54,7 +54,7 @@
                         </div>
 
                         <div class="form-group row">
-                            <label for="role" class="col-md-4 col-form-label text-md-right">ประเภทผู้ใช้</label>
+                            <label for="role" class="col-md-5 col-form-label text-md-">ประเภทผู้ใช้<label style="color: red">†จำเป็น</label></label>
                             <div class="col-md-6">
                                 <select name="usertypeid" class="form-control">
                                     <option value="1">Admin</option>
@@ -65,7 +65,7 @@
                         </div>
 
                         <div class="form-group row">
-                            <label for="logintype" class="col-md-4 col-form-label text-md-right">ประเภทล็อคอิน</label>
+                            <label for="logintype" class="col-md-5 col-form-label text-md-">ประเภทล็อคอิน<label style="color: red">†จำเป็น</label></label>
                             <div class="col-md-6">
                                 <select name="logintype" class="form-control">
                                     <option value="1">AD</option>
@@ -75,19 +75,18 @@
                         </div>
 
                         <div class="form-group row">
-                            <label for="departmentid" class="col-md-4 col-form-label text-md-right">แผนก</label>
+                            <label for="departmentid" class="col-md-5 col-form-label text-md-">แผนก<label style="color: red">†จำเป็น</label></label>
                             <div class="col-md-6">
-                            <p>
                                 <select id="departmentid" name="departmentid" class="form-control" require>
                                     @foreach($department as $row3)
                                     <option value="{{$row3->departmentid}}" @if (old("Roomid")==$row3->departmentid) selected @endif>{{$row3->dmname}}</option>
                                     @endforeach
-                                </select></p>
+                                </select>
                             </div>
                         </div>
 
                         <div class="form-group row">
-                            <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('รหัสผ่าน') }}</label>
+                            <label for="password" class="col-md-5 col-form-label text-md-">{{ __('รหัสผ่าน') }}<label style="color: red">†จำเป็น</label></label>
 
                             <div class="col-md-6">
                                 <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password">
@@ -101,7 +100,7 @@
                         </div>
 
                         <div class="form-group row">
-                            <label for="password-confirm" class="col-md-4 col-form-label text-md-right">{{ __('ยืนยันรหัสผ่าน') }}</label>
+                            <label for="password-confirm" class="col-md-5 col-form-label text-md-">{{ __('ยืนยันรหัสผ่าน') }}<label style="color: red">†จำเป็น</label></label>
 
                             <div class="col-md-6">
                                 <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password">
@@ -109,35 +108,27 @@
                         </div>
 
                         <div class="form-group row">
-                            <label for="latitude" class="col-md-4 col-form-label text-md-right">{{ __('ละติจูด') }}</label>
+                            <label for="latitude" class="col-md-5 col-form-label text-md-">{{ __('ละติจูด') }}</label>
 
                             <div class="col-md-6">
-                                <input id="latitude" type="latitude" class="form-control @error('latitude') is-invalid @enderror" name="latitude" value="{{ old('latitude') }}" required autocomplete="latitude">
+                                <input id="latitude" type="latitude" class="form-control" name="latitude" value="{{ old('latitude') }}">
 
-                                @error('latitude')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                                @enderror
+                               
                             </div>
                         </div>
 
                         <div class="form-group row">
-                            <label for="longitude" class="col-md-4 col-form-label text-md-right">{{ __('ลองจิจูด') }}</label>
+                            <label for="longitude" class="col-md-5 col-form-label text-md-">{{ __('ลองจิจูด') }}</label>
 
                             <div class="col-md-6">
-                                <input id="longitude" type="longitude" class="form-control @error('longitude') is-invalid @enderror" name="longitude" value="{{ old('longitude') }}" required autocomplete="longitude">
+                                <input id="longitude" type="longitude" class="form-control " name="longitude" value="{{ old('longitude') }}" >
 
-                                @error('longitude')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                                @enderror
+
                             </div>
                         </div>
 
                         <div class="form-group row">
-                        <label for="Image" class="col-md-4 col-form-label text-md-right">{{ __('รูปโปรไฟล์') }}</label>
+                        <label for="Image" class="col-md-5 col-form-label text-md-">{{ __('รูปโปรไฟล์') }}</label>
                             <div class="col-md-6">
                                 <input type="file" id="Image" name="Image">
                             </div>

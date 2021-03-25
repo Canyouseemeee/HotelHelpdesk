@@ -325,6 +325,7 @@ class ApiController extends Controller
         $task->description = $description;
         $task->statustask = 1;
         $task->departmentid = $departmentid;
+        $task->date_in = DateThai(Carbon::now()->toDateString());
         $task->assignment = $assignment;
         $task->assign_date = DateThai(Carbon::now());
         $task->due_date = $duedate;
@@ -762,12 +763,92 @@ class ApiController extends Controller
 
         $task = Task::find($taskid);
         $task->statustask = 3;
+        $task->close_date = Carbon::today();
         $task->updated_at = DateThai(Carbon::now());
         $task->update();
 
         return response()->json([
             'status' => 'success'
         ]);
+    }
+
+    public function gethistoryassignsolve(Request $request)
+    {
+        $userid = $request->input('userid');
+
+        $data = DB::table('solvework')
+        ->select(
+            'solveworkid',
+            'solvework.taskid',
+            'createsolvework',
+            'solvework.subject',
+            'statussolvework.statussolveworkid',
+            'solvework.statussolvework',
+            'solvework.departmentid',
+            'departments.dmname',
+            'solvework.assignment',
+            'users.name',
+            'solvework.file',
+            'solvework.assign_date',
+            'solvework.due_date',
+            'solvework.close_date',
+        )
+        ->join('task', 'task.taskid', '=', 'solvework.taskid')
+        ->join('users', 'solvework.createsolvework', '=', 'users.id')
+        ->join('statussolvework', 'solvework.statussolvework', '=', 'statussolvework.statussolveworkid')
+        ->join('departments', 'solvework.departmentid', '=', 'departments.departmentid')
+        ->where('solvework.assignment',$userid)
+        ->where('solvework.close_date', Carbon::now()->toDateString())
+        ->where('solvework.statussolvework',2)
+        ->orderBy('task.taskid', 'DESC')
+        ->get();
+
+        // echo($data->createtask);
+
+        // echo(Carbon::now());
+
+        return response()->json($data);
+    }
+
+    public function gethistorybetweenassignsolve(Request $request)
+    {
+        $userid = $request->input('userid');
+        $fromdate = $request->input('fromdate');
+        $todate = $request->input('todate');
+        $taskid = $request->input('taskid');
+
+    
+        $data = DB::table('solvework')
+        ->select(
+            'solveworkid',
+            'solvework.taskid',
+            'createsolvework',
+            'solvework.subject',
+            'statussolvework.statussolveworkid',
+            'solvework.statussolvework',
+            'solvework.departmentid',
+            'departments.dmname',
+            'solvework.assignment',
+            'users.name',
+            'solvework.file',
+            'solvework.assign_date',
+            'solvework.due_date',
+            'solvework.close_date',
+        )
+        ->join('task', 'task.taskid', '=', 'solvework.taskid')
+        ->join('users', 'solvework.createsolvework', '=', 'users.id')
+        ->join('statussolvework', 'solvework.statussolvework', '=', 'statussolvework.statussolveworkid')
+        ->join('departments', 'solvework.departmentid', '=', 'departments.departmentid')
+        ->where('solvework.assignment',$userid)
+        ->where('solvework.taskid',$taskid)
+        ->whereBetween('solvework.close_date', [$fromdate, $todate])
+        ->where('solvework.statussolvework',2)
+        ->orderBy('solvework.solveworkid', 'DESC')
+        ->get();
+
+            // echo(Carbon::now());
+
+        return response()->json($data);
     }
 
     public function download(){
