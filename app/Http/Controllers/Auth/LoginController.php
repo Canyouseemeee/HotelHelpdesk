@@ -99,10 +99,12 @@ class LoginController extends Controller
                 // check ad
                 // Auth::loginUsingId($uinfo->id, TRUE); //AD 
                 if (Auth::loginUsingId($uinfo->id, TRUE)) {
-                    if (Auth::user()->usertype == 'admin') {
-                        return redirect()->intended('issues');
-                    } else if (Auth::user()->usertype == 'user') {
-                        return redirect()->intended('issues-user');
+                    if (Auth::user()->usertypeid == 1) {
+                        return redirect()->intended('tasksnews');
+                    } else if (Auth::user()->usertypeid == 2) {
+                        return redirect()->intended('tasksnews');
+                    } else if (Auth::user()->usertypeid == 3) {
+                        return redirect()->back();
                     } else{
                         return redirect()->back();
                     }
@@ -111,11 +113,13 @@ class LoginController extends Controller
                 // $credentials = $request->only('username', 'password');
                 // print_r($credentials);
                 if (Auth::attempt($credentials)) {
-                    if (Auth::user()->usertype == 'admin') {
-                        return redirect()->intended('issues');
-                    } else if (Auth::user()->usertype == 'user') {
-                        return redirect()->intended('issues-user');
-                    }else{
+                    if (Auth::user()->usertypeid == 1) {
+                        return redirect()->intended('tasksnews');
+                    } else if (Auth::user()->usertypeid == 2) {
+                        return redirect()->intended('tasksnews');
+                    } else if (Auth::user()->usertypeid == 3) {
+                        return redirect()->back();
+                    } else{
                         return redirect()->back();
                     }
                 } else{

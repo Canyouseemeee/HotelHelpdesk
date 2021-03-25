@@ -9,8 +9,13 @@ Web Test
 <?php
 function DateThai($strDate)
 {
-    $newDate = date('Y-m-d\TH:i', strtotime($strDate));
-    return "$newDate";
+    $strYear = date("Y", strtotime($strDate));
+    $strMonth = date("n", strtotime($strDate));
+    $strDay = date("j", strtotime($strDate));
+    $strHour = date("H", strtotime($strDate));
+    $strMinute = date("i", strtotime($strDate));
+    $strSeconds = date("s", strtotime($strDate));
+    return "$strYear-$strMonth-$strDay $strHour:$strMinute:$strSeconds";
 }
 ?>
 
@@ -35,353 +40,76 @@ function DateThai($strDate)
                 </div>
                 @endforeach
                 @endif
-                <form action="{{ url('issues-update/'.$data->Issuesid) }}" method="POST" enctype="multipart/form-data">
+                <form action="{{ url('tasks-update/'.$data->taskid) }}" method="POST" enctype="multipart/form-data">
                     {{ csrf_field() }}
                     {{ method_field('PUT') }}
 
                     <div class="form-row">
 
-                        <!-- <div class="col-md-3">
-                            <label>Tracker</label>
-                            <select name="TrackName" id="TrackName" class="form-control input-lg dynamic" data-dependent="SubTrackName">
-                                @foreach($find as $find1)
-                                @foreach($trackname as $row)
-                                <option value="{{$row->TrackName}}" @if ($row->TrackName === $find1->TrackName)
-                                    selected
-                                    @endif
-                                    >{{$row->TrackName}}</option>
-                                @endforeach
-                                @endforeach
-                            </select>
-                        </div>
 
-                        <div class="col-md-3">
-                            <label>SubTracker</label>
-                            <select name="SubTrackName" id="SubTrackName" class="form-control input-lg dynamic findidother" data-dependent="Name" disabled>
-                                <option value="">Select SubTrackName</option>
-                                @foreach($tracker as $row11)
-                                <option value="" @if ($row11->Trackerid === $data->Trackerid)
-                                    selected
-                                    @endif
-                                    >{{$row11->SubTrackName}}</option>
-                                @endforeach
-                            </select>
-                        </div>
+                    <div class="form-group col-md-3">
+                                    <label>พนักงานที่สร้าง</label>
+                                    <input name="Createby" class="form-control" readonly="readonly" value="{{$data->createtask}}" placeholder="{$data->createtask}}">
+                                </div>
 
-                        <div class="col-md-3">
-                            <label>Name</label>
-                            <select name="Name" id="Name" class="form-control input-lg Name " disabled>
-                                <option value="">Select Name</option>
-                                @foreach($tracker as $row12)
-                                <option value="" @if ($row12->Trackerid === $data->Trackerid)
-                                    selected
-                                    @endif
-                                    >{{$row12->Name}}</option>
-                                @endforeach
-                            </select>
-                        </div> -->
+                                <div class="form-group col-md-3">
+                                    <label>วันเวลาที่หมอบหมาย</label>
+                                    <input name="assign_date" class="form-control" readonly="readonly" value="{{$data->assign_date}}" placeholder="{$data->assign_date}}">
+                                </div>
 
-                        <!-- <div class="form-group">
-                            <input type="hidden" value="{{$data->Trackerid}}" class="tracker_id" id="Trackerid" name="Trackerid">
-                        </div> -->
-
-                        <!-- <div class="col-md-3">
-                            <label>Priority</label>
-                            <select name="Priorityid" class="form-control create" require>
-                                @foreach($issuespriority as $row2)
-                                <option value="{{$row2->Priorityid}}" @if ($row2->Priorityid === $data->Priorityid)
+                                <div class="form-group col-md-3">
+                                    <label for="title">แผนก</label>
+                                    <select id="department" name="department" class="form-control formselect required">
+                                        <option value="0">--- เลือก แผนก ---</option>
+                                    @foreach ($department as $key)
+                                        <option value="{{ $key->departmentid }}" @if ($key->departmentid === $data->departmentid)
                                     selected
-                                    @endif
-                                    >{{$row2->ISPName}}</option>
-                                @endforeach
-                            </select>
-                        </div> -->
-
-                        <div class="form-group col-md-3">
-                            <label>NoRoom</label>
-                            <p>
-                                <select id="Roomid" name="Roomid" class="form-control-lg create col-md-12" require>
-                                    @foreach($room as $row3)
-                                    <option value="{{$row3->Roomid}}"  @if ($row3->Roomid === $data->Roomid)
-                                    selected
-                                    @endif>{{$row3->NoRoom}}</option>
+                                    @endif>{{ $key->dmname }}</option>
                                     @endforeach
-                                </select></p>
-                        </div>
+                                    </select>
+                                </div>
 
-                        <div class="col-md-3">
-                            <label>Status</label>
-                            @if($data->Statusid === 2)
-                            <select name="Statusid" class="form-control create" require disabled>
-                                @foreach($issuesstatus as $row3)
-                                <option value="{{$row3->Statusid}}" @if ($row3->Statusid === $data->Statusid)
+                                <div class="form-group col-md-3">
+                                    <label>หมอบหมายให้</label>
+                                    <select id="assignment" name="assignment" class="form-control formselect  create" require>
+                                    <option value="">--- เลือก พนักงาน ---</option>
+                                    @foreach ($user as $key)
+                                        <option value="{{$key->id}}"@if ($key->id === $data->assignment)
                                     selected
-                                    @endif
-                                    >{{$row3->ISSName}}</option>
-                                @endforeach
-                            </select>
-                            @else
-                            <select name="Statusid" class="form-control create" require>
-                                @foreach($issuesstatus as $row3)
-                                <option value="{{$row3->Statusid}}" @if ($row3->Statusid === $data->Statusid)
-                                    selected
-                                    @endif
-                                    >{{$row3->ISSName}}</option>
-                                @endforeach
-                            </select>
-
-                            @endif
-
-                        </div>
-
-                        <div class="col-md-3">
-                            <label>TypeIssues</label>
-                            <p>
-                                <select id="Typeissuesid" name="Typeissuesid" class="form-control create col-md-12" require>
-                                    @foreach($typeissues as $row4)
-                                    <option value="{{$row4->Typeissuesid}}" @if ($row4->Typeissuesid === $data->Typeissuesid)
-                                        selected
-                                        @endif
-                                        >{{$row4->Typename}}</option>
+                                    @endif>{{ $key->name }}</option>
                                     @endforeach
-                                </select>
-                            </p>
+                                    </select>
+                                </div>
                         </div>
 
-                        <div class="form-group col-md-3">
-                            <label>Updatedby</label>
-                            <input name="Updatedby" class="form-control" readonly="readonly" value="{{Auth::user()->name}}" placeholder="{{Auth::user()->name}}">
-                        </div>
-
-                        <div class="form-group col-md-3">
-                            <label>DateIn</label>
-                            <input name="Date_In" class="form-control" readonly="readonly" value="{{$data->Date_In}}" placeholder="{{$data->Date_In}}">
-                        </div>
-
-                        <div class="form-group col-md-3">
-                            <label>Assignment</label>
-                            <select name="Assignment" class="form-control create" require>
-                                @foreach($user as $row5)
-                                    @foreach($usertest as $rowtest)
-                                    @if ($row5->id === $rowtest->id)
-                                    @if ($rowtest->Statusid === null)
-                                        <option value="{{$row5->id}}" @if ($row5->id === $data->Assignment)
-                                    selected
-                                    @endif>{{$row5->name}} - 0</option>
-                                    @else
-                                        <option value="{{$row5->id}}" @if ($row5->id === $data->Assignment)
-                                    selected
-                                    @endif>{{$row5->name}} - {{$rowtest->count}}</option>
-                                    @endif
-                                    @endif
-                                    @endforeach
-                                @endforeach
-                            </select>
-                        </div>
-
+                    <div class="form-group">
+                        <label>หัวเรื่อง</label>
+                        <input type="text" name="subject" class="form-control" value="{{$data->subject}}">
                     </div>
 
                     <div class="form-group">
-                        <label>Subject</label>
-                        <input type="text" name="Subject" class="form-control" value="{{$data->Subject}}">
+                        <label>รายละเอียด</label>
+                        <textarea type="text" name="description" class="form-control">{{$data->description}}</textarea>
                     </div>
 
                     <div class="form-group">
-                        <label>Description</label>
-                        <textarea type="text" name="Description" class="form-control">{{$data->Description}}</textarea>
+                        <label>วันจะให้ที่ส่ง</label>
+                        <input type="text" class="form-control datetimepicker" value="{{DateThai($data->due_date)}}" placeholder="{{DateThai($data->due_date)}}" id="due_date" name="due_date" > 
                     </div>
 
-                    <div>
+                    <!-- <div>
                         <input type="hidden" name="Image2" value="{{$data->Image}}">
                         <input type="file" name="Image">
-                    </div>
+                    </div> -->
                     <br>
-                    <input type="submit" value="Update" class="btn btn-primary ">
-                    <a href="{{ url('issues-show/'.$data->Issuesid) }}" class="btn btn-danger">Back</a>
+                    <input type="submit" value="อัพเดท" class="btn btn-primary ">
+                    <a href="{{ url('tasks-show/'.$data->taskid) }}" class="btn btn-danger">กลับ</a>
                 </form>
             </div>
         </div>
     </div>
 </div>
 
-<div class="row panelsub_all subcomment">
-    <style>
-        .elevation-2 {
-            box-shadow: 0 3px 6px rgba(0, 0, 0, .16), 0 3px 6px rgba(0, 0, 0, .23) !important;
-        }
-
-        .img-circle {
-            border-radius: 50%;
-        }
-
-        .username {
-            font-size: 16px;
-            font-weight: 600;
-            margin-top: -1px;
-        }
-
-        .card {
-            position: relative;
-            display: flex;
-            flex-direction: column;
-            min-width: 0;
-            word-wrap: break-word;
-            background-color: #fff;
-            background-clip: border-box;
-            border: 1px solid rgba(0, 0, 0, 0.125);
-            border-radius: 0.25rem;
-        }
-
-        .card-header {
-            padding: 0.75rem 1.25rem;
-            margin-bottom: 0;
-            background-color: #fff;
-
-            border-bottom: 1px solid rgba(0, 0, 0, 0.125);
-        }
-
-        .user-block .description {
-            color: #6c757d;
-            font-size: 13px;
-            margin-top: -3px;
-        }
-
-        .card-body {
-            -ms-flex: 1 1 auto;
-            flex: 1 1 auto;
-            padding: 1.25rem;
-            background-color: #fff;
-        }
-
-        .img-fluid {
-            max-width: 100%;
-            height: auto;
-        }
-
-        img {
-            vertical-align: middle;
-            border-style: none;
-        }
-
-        .card-widget {
-            border: 0;
-            position: relative;
-            border-top: 0;
-        }
-
-        .center {
-            display: block;
-            margin-left: auto;
-            margin-right: auto;
-            width: 50%;
-        }
-    </style>
-    <div class="col-md-12">
-        <!-- Box Comment -->
-        <div class="card-header">
-            <h4 class="card-title"> Comments
-                <!-- <a href="" class="btn btn-primary float-right" data-toggle="modal" data-target="#issuescommentsModal">Comments Add</a> -->
-            </h4>
-            <!-- <form id="addformcomment" enctype="multipart/form-data"> -->
-            <form id="addformcomment">
-                {{ csrf_field() }}
-                <div class="body">
-                    <div class="form-group">
-                        <label for="">Comment</label>
-                        <textarea id="CComment" name="CComment" class="form-control" rows="1" placeholder="Enter Comment"></textarea>
-                    </div>
-
-                    <div class="form-group">
-                        <input type="hidden" id="Issuesid" name="Issuesid" class="form-control" value="{{$data->Issuesid}}" placeholder="{{$data->Issuesid}}">
-                    </div>
-                    
-                    <div class="form-group">
-                        <label for="">Image</label><br>
-                        <input type="file" id="image" name="image">
-                    </div>
-
-                    <div class="form-group">
-                        <!-- <label for="">Createby</label> -->
-                        <input type="text" id="CCreateby" name="CCreateby" class="form-control" value="{{Auth::user()->name}}" placeholder="{{Auth::user()->name}}" hidden>
-                    </div>
-
-                    <div class="form-group">
-                        <!-- <label for="">Uuid</label> -->
-                        <input id="Ctemp" name="Ctemp" class="form-control" placeholder="{{$temp}}" value="{{$temp}}" hidden>
-                    </div>
-
-                    <div id="resultcomment">
-                    </div>
-
-                    <div id="resultcomment2">
-                    </div>
-                </div>
-                <div class="footer">
-                    <button type="button" id="savecomment" class="btn btn-primary right">Post</button>
-                    <br>
-                    <div id="countcomment">
-                        @if(!is_null($countcomment))
-                        <br>
-                        <h4>Comments ({{$countcomment}})</h4>
-                        @endif
-                    </div>
-                </div>
-            </form>
-        </div>
-        <div class="card-footer">
-            <br>
-        </div>
-        <div style="overflow-y: auto;; height: 500px;">
-            <div class="card card-widget" id="cardcomment">
-                @if(!is_null($comment))
-                @foreach($comment as $row)
-                <div class="card-header">
-                    <div class="user-block">
-                        @foreach($usercomment as $userc)
-                        @if(!is_null($userc->image))
-                        <img class="img-circle" src="{{ url('storage/'.$userc->image) }}" alt="Image" width="50" height="50">
-                        @else
-                        <span class="username">ไม่มีรูปภาพ</span>
-                        @endif
-                        @endforeach
-                        <span class="username">{{$row->Createby}} : </span>
-                        <span class="description">{{$row->created_at}}</span>
-                        @if($row->Type === 1)
-                        <span class="description">: App</span>
-                        @elseif($row->Type === 0)
-                        <span class="description">: Web</span>
-                        @endif
-                        @if($row->Status === 1)
-                        <span class="description" style="color: green;">#Active</span>
-                        @elseif($row->Status === 0)
-                        <span class="description" style="color: red;">#UnActive</span>
-                        @endif
-                    </div>
-                </div>
-                <div class="card-body">
-                    @if($row->Status === 1)
-                    <button id="Unsend1" type="button" OnClick="JavaScript:fncConfirm1({{$row->Commentid}});" class="btn btn-default btn-sm float-right"><i class="fas fa-comment-slash"></i></i> Unsend</button>
-                    @endif
-                    @if($row->Image != null)
-                    <img class="img-fluid pad center" src="{{ url('storage/'.$row->Image) }}" style="align-items: center;" width="555" height="550" alt="Photo">
-                    @else
-                    <p style="padding-top: 20px;">ไม่มีรูปภาพ</p>
-                    @endif
-                    <p style="padding-top: 20px;">{{$row->Comment}}</p>
-                    <span class="float-right text-muted">updated {{$row->updated_at}} By {{$row->Updateby}}</span>
-                </div>
-                <div class="card-footer">
-                    <br>
-                </div>
-                @endforeach
-            </div>
-            @else
-            <div class="card card-widget" id="cardcomment">
-            </div>
-            @endif
-        </div>
-    </div>
-</div>
 @endsection
 
 @section('scripts')
@@ -389,7 +117,16 @@ function DateThai($strDate)
 <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/js/select2.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
-
+<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.47/css/bootstrap-datetimepicker.css" integrity="sha256-b5ZKCi55IX+24Jqn638cP/q3Nb2nlx+MH/vMMqrId6k=" crossorigin="anonymous" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.26.0/moment.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.47/js/bootstrap-datetimepicker.min.js" integrity="sha256-5YmaxAwMjIpMrVlK84Y/+NjCpKnFYa8bWWBbUHSBGfU=" crossorigin="anonymous"></script>
+<script type="text/javascript">
+        $(function () {
+            $('.datetimepicker').datetimepicker();
+        });
+</script>
 <script>
     $(document).ready(function() {
 
@@ -531,6 +268,26 @@ function DateThai($strDate)
 
         });
 
+    });
+    $(document).ready(function () {
+                $('#department').on('change', function () {
+                let id = $(this).val();
+                $('#assignment').empty();
+                $('#assignment').append(`<option value="0" disabled selected>กำลังโหลด...</option>`);
+                $.ajax({
+                type: 'GET',
+                url: '/GetSubCatAgainstMainCatEdit/' + id,
+                success: function (response) {
+                var response = JSON.parse(response);
+                console.log(response);   
+                $('#assignment').empty();
+                $('#assignment').append(`<option value="0" disabled selected>เลือกพนักงาน</option>`);
+                response.forEach(element => {
+                    $('#assignment').append(`<option value="${element['id']}">${element['name']}</option>`);
+                    });
+                }
+            });
+        });
     });
 </script>
 

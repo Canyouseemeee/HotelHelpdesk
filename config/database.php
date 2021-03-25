@@ -48,7 +48,7 @@ return [
             'url' => env('DATABASE_URL'),
             'host' => env('DB_HOST', '127.0.0.1'),
             'port' => env('DB_PORT', '3306'),
-            'database' => env('DB_DATABASE', 'hotelhelpdesk'),
+            'database' => env('DB_DATABASE', 'workfromhome'),
             'username' => env('DB_USERNAME', 'Bank'),
             'password' => env('DB_PASSWORD', '1234'),
             'unix_socket' => env('DB_SOCKET', ''),

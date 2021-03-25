@@ -1,6 +1,8 @@
 <?php
 
 use App\Models\Appointments;
+use App\Models\User;
+use App\Http\Controllers\TaskController;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -60,39 +62,40 @@ Route::get('/success', 'User\CreateuserController@success');
 
 
     //issues//
-    Route::get('/issues', 'Admin\IssuesController@index');
-    Route::get('/closed', 'Admin\IssuesController@closed');
-    Route::get('/progress', 'Admin\IssuesController@progress');
-    Route::post('/issues-filter-news', 'Admin\IssuesController@getReport');
-    Route::post('/issues-filter-progress', 'Admin\IssuesController@getReportprogress');
-    Route::post('/issues-filter-closed', 'Admin\IssuesController@getReportclosed');
-    Route::get('/issues-edit/{id}/{Uuidapp?}', 'Admin\IssuesController@edit');
-    Route::put('/issues-update/{id}', 'Admin\IssuesController@update', function () {
+    Route::get('/tasksnews', 'Admin\TaskController@index');
+    Route::get('/tasksclosed', 'Admin\TaskController@closed');
+    Route::get('/tasksprogress', 'Admin\TaskController@progress');
+    Route::post('/tasks-filter-news', 'Admin\TaskController@getReport');
+    Route::post('/tasks-filter-progress', 'Admin\TaskController@getReportprogress');
+    Route::post('/tasks-filter-closed', 'Admin\TaskController@getReportclosed');
+    Route::get('/tasks-edit/{id}', 'Admin\TaskController@edit');
+    Route::put('/tasks-update/{id}', 'Admin\TaskController@update', function () {
         Artisan::call('storage:link');
     });
-    Route::get('/issues-show/{id}', 'Admin\IssuesController@show', function () {
+    Route::get('/tasks-show/{id}', 'Admin\TaskController@show', function () {
         Artisan::call('storage:link');
     });
-    Route::get('/dynamic/fetch', 'Admin\IssuesController@fetch')->name('dynamiccontroller.fetch');
-    Route::get('/findid', 'Admin\IssuesController@findid');
-    Route::get('/findidother', 'Admin\IssuesController@findidother');
-    Route::get('/issues-create/{Uuidapp?}', 'Admin\IssuesController@create');
+    Route::get('GetSubCatAgainstMainCatEdit/{id}', 'Admin\TaskController@GetSubCatAgainstMainCatEdit');
+    Route::get('/dynamic/fetch', 'Admin\TaskController@fetch')->name('dynamiccontroller.fetch');
+    Route::get('/findid', 'Admin\TaskController@findid');
+    Route::get('/findidother', 'Admin\TaskController@findidother');
+    Route::get('/tasks-create', 'Admin\TaskController@create');
     //Route::get('/issues-create', 'Admin\IssuesController@create');
-    Route::get('/issues-select2', 'Admin\IssuesController@select2')->name('select2');
-    Route::post('/issues-store', 'Admin\IssuesController@store')->name('issues-store');
+    Route::get('/tasks-select2', 'Admin\TaskController@select2')->name('select2');
+    Route::post('/tasks-store', 'Admin\TaskController@store')->name('issues-store');
 
     //Appointment// 
     Route::post('/appointment-add', 'Admin\AppointmentController@store');
     Route::post('/issues-appointment-add', 'Admin\AppointmentController@storeedit');
 
-    //typeissues//
-    Route::get('/typeissues', 'Admin\TypeIssuesController@index');
-    Route::get('/typeissues-create', 'Admin\TypeIssuesController@create');
-    Route::post('/typeissues-store', 'Admin\TypeIssuesController@store');
-    Route::get('/typeissues-edit/{id}', 'Admin\TypeIssuesController@edit');
-    Route::put('/typeissues-update/{id}', 'Admin\TypeIssuesController@update');
-    Route::delete('/typeissues-delete/{id}', 'Admin\TypeIssuesController@delete');
-    Route::get('/changStatus', 'Admin\TypeIssuesController@changStatus')->name('change_Status');
+    //department//
+    Route::get('/department', 'Admin\DepartmentController@index');
+    Route::get('/department-create', 'Admin\DepartmentController@create');
+    Route::post('/department-store', 'Admin\DepartmentController@store');
+    Route::get('/department-edit/{id}', 'Admin\DepartmentController@edit');
+    Route::put('/department-update/{id}', 'Admin\DepartmentController@update');
+    Route::delete('/department-delete/{id}', 'Admin\DepartmentController@delete');
+    Route::get('/changStatus', 'Admin\DepartmentController@changStatus')->name('change_Status');
 
     //device//
     Route::get('/device', 'Admin\DeviceController@index');
@@ -163,22 +166,22 @@ Route::get('pdf/{id}', 'Admin\PDFController@pdf');
 Route::get('/dynamic/fetch', 'Admin\IssuesController@fetch')->name('dynamiccontroller.fetch');
 
 
-//room//
-Route::get('/room', 'Admin\RoomController@index');
-Route::get('/room-create', 'Admin\RoomController@create');
-Route::post('/room-store', 'Admin\RoomController@store');
-Route::get('/room-edit/{id}', 'Admin\RoomController@edit');
-Route::put('/room-update/{id}', 'Admin\RoomController@update');
-Route::delete('/room-delete/{id}', 'Admin\RoomController@delete');
+//statustask//
+Route::get('/statustask', 'Admin\StatusTaskController@index');
+Route::get('/statustask-create', 'Admin\StatusTaskController@create');
+Route::post('/statustask-store', 'Admin\StatusTaskController@store');
+Route::get('/statustask-edit/{id}', 'Admin\StatusTaskController@edit');
+Route::put('/statustask-update/{id}', 'Admin\StatusTaskController@update');
+Route::delete('/statustask-delete/{id}', 'Admin\RoomController@delete');
 Route::get('/changStatusRoom', 'Admin\RoomController@changStatusRoom')->name('change_StatusRoom');
 
 //status//
-Route::get('/status', 'Admin\StatusController@index');
-Route::get('/status-create', 'Admin\StatusController@create');
-Route::post('/status-store', 'Admin\StatusController@store');
-Route::get('/status-edit/{id}', 'Admin\StatusController@edit');
-Route::put('/status-update/{id}', 'Admin\StatusController@update');
-Route::delete('/status-delete/{id}', 'Admin\StatusController@delete');
+Route::get('/statususer', 'Admin\StatusUserController@index');
+Route::get('/statususer-create', 'Admin\StatusUserController@create');
+Route::post('/statususer-store', 'Admin\StatusUserController@store');
+Route::get('/statususer-edit/{id}', 'Admin\StatusUserController@edit');
+Route::put('/statususer-update/{id}', 'Admin\StatusUserController@update');
+Route::delete('/statususer-delete/{id}', 'Admin\StatusUserController@delete');
 
 
 

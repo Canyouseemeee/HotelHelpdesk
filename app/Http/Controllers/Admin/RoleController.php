@@ -4,31 +4,40 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\User;
+use App\Models\Department;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\DB;
 
 
 class RoleController extends Controller
 {
     public function registered(){
         $users = User::all();
-        return view('admin.register',compact('users'));
+        $data = DB::table('users')
+        ->select('id','name','image','usertypeid','username','logintype','departments.dmname','active','latitude','longitude')
+        ->join('departments', 'users.departmentid', '=', 'departments.departmentid')
+        ->get();
+        return view('admin.register',compact('data'));
     }
 
     public function registeredcreate(Request $request){
-        
-        return view('admin.register-create');
+        $department = Department::all();
+        return view('admin.register-create',compact('department'));
     }
 
     public function registerstore(Request $request)
     {
         $user = new User;
+        $user->id = $request->input('id');
         $user->name = $request->input('name');
-        $user->teamid = $request->input('teamid');
-        $user->usertype = $request->input('usertype');
+        $user->departmentid = $request->input('departmentid');
+        $user->usertypeid = $request->input('usertypeid');
         $user->logintype = $request->input('logintype');
         $user->username = $request->input('username');
         $user->password = Hash::make($request->input('password'));
+        $user->latitude = $request->input('latitude');
+        $user->longitude = $request->input('longitude');
         if ($request->hasFile('Image')) {
             $filename = $request->Image->getClientOriginalName();
             $file = time() . '.' . $filename;
@@ -40,7 +49,7 @@ class RoleController extends Controller
         // echo($user);
         $user->save();
 
-        return redirect('/role-register')->with('status','Your add user Success');
+        return redirect('/role-register')->with('status','เพิ่มข้อมูลพนักงานสำเร็จ');
     }
 
     public function changActive(Request $request)
@@ -52,18 +61,21 @@ class RoleController extends Controller
         return response()->json(['success' => 'Status Change successfully']);
     }
 
-    public function registeredit(Request $request, $id){
-        $users = User::findOrFail($id);
-        return view('admin.register-edit',compact('users'));
+    public function registeredit(Request $request,$id){
+        $users = User::find($id);
+        $department = Department::all();
+        return view('admin.register-edit',compact('users','department'));
     }
 
     public function registerupdate(Request $request, $id){
         $users = User::find($id);
         $users->name = $request->input('name');
-        $users->teamid = $request->input('teamid');
-        $users->usertype = $request->input('usertype');
+        $users->departmentid = $request->input('departmentid');
+        $users->usertypeid = $request->input('usertypeid');
         $users->logintype = $request->input('logintype');
         $users->username = $request->input('username');
+        $user->latitude = $request->input('latitude');
+        $user->longitude = $request->input('longitude');
         if ($request->hasFile('image')) {
             $filename = $request->image->getClientOriginalName();
             $file = time() . '.' . $filename;
@@ -74,7 +86,7 @@ class RoleController extends Controller
         }
         $users->update();
 
-        return redirect('/role-register')->with('status','Your User is Updated');
+        return redirect('/role-register')->with('status','อัพเดทข้อมูลพนักงงานสำเร็จ');
     }
 
     public function registerreset(Request $request, $id){

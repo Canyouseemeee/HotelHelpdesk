@@ -9,7 +9,7 @@ Register
     <div class="col-md-12">
         <div class="card">
             <div class="card-header">
-                <h4 class="card-title">UserManagement <a href="{{ url('create-user') }}" class="btn btn-primary float-right">Add User</a></h4>
+                <h4 class="card-title">จัดการข้อมูลพนักงาน <a href="{{ url('create-user') }}" class="btn btn-primary float-right">เพิ่มข้อมูลพนักงาน</a></h4>
                 @if (session('status'))
                 <div class="alert alert-success" role="alert">
                     {{ session('status') }}
@@ -20,54 +20,45 @@ Register
                 <div class="table-responsive">
                     <table id="datatable" class="table">
                         <thead class="text-primary">
-                            <th>Images</th>
-                            <th>Name</th>
-                            <th>Team</th>
-                            <th>Username</th>
-                            <th>Logintype</th>
-                            <th>Usertype</th>
-                            <th>Status</th>
-                            <th>EDIT</th>
-                            <th>Active</th>
+                            <th>รหัสพนักงาน</th>
+                            <th>รูปภาพ</th>
+                            <th>ชื่อ-นามสกุล</th>
+                            <th>แผนก</th>
+                            <th>ชื่อผู้ใช้</th>
+                            <th>ประเภทล็อคอิน</th>
+                            <th>ประเภทผู้ใช้</th>
+                            <th>แก้ไข</th>
+                            <th>สถานะ</th>
                         </thead>
                         <tbody>
-                            @foreach($users as $row)
+                            @foreach($data as $row)
                             <tr>
+                                <td>{{$row->id}}</td>
                                 @if($row->image === null)
                                 <td>ไม่มีรูปภาพ</td>
                                 @else
                                 <td><img src="{{ url('storage/'.$row->image) }}" alt="image" width="80" height="80"></td>
                                 @endif
                                 <td>{{$row->name}}</td>
-                                @if($row->teamid === 1)
-                                <td>Technician</td>
-                                @elseif($row->teamid === 2)
-                                <td>Reception</td>
-                                @elseif($row->teamid === 3)
-                                <td>ADMIN</td>
-                                @endif
+                                <td>{{$row->dmname}}</td>
+                          
                                 <td>{{$row->username}}</td>
                                 @if($row->logintype === 1)
                                 <td>AD</td>
                                 @elseif($row->logintype === 0)
                                 <td>DB</td>
                                 @endif
-                                <td>{{$row->usertype}}</td>
+                                @if($row->usertypeid === 1)
+                                <td>ADMIN</td>
+                                @elseif($row->usertypeid === 2)
+                                <td>SUPERUSER</td>
+                                @elseif($row->usertypeid === 3)
+                                <td>USER</td>
+                                @endif
                                 <td>
-                                    @if ($row->isOnline())
-                                    <li class="text-success">
-                                        Online
-                                    </li>
-                                    @else
-                                    <li class="text-muted">
-                                        Offline
-                                    </li>
-                                    @endif
+                                    <a href="/role-edit/{{$row->id}}" class="btn btn-success">แก้ไข</a>
                                 </td>
-                                <td>
-                                    <a href="/role-edit/{{$row->id}}" class="btn btn-success">EDIT</a>
-                                </td>
-                                <td><input type="checkbox" class="toggle-class" data-id="{{$row->id}}" data-toggle="toggle" data-on="Enabled" data-off="Disabled" {{$row->active==true ? 'checked':''}}></td>
+                                <td><input type="checkbox" class="toggle-class" data-id="{{$row->id}}" data-toggle="toggle" data-on="เปืด" data-off="ปิด" {{$row->active==true ? 'checked':''}}></td>
                                 <td>
                             </tr>
                             @endforeach

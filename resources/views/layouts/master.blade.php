@@ -9,7 +9,7 @@
   <meta name="description" content="">
   <meta name="author" content="">
 
-  <title>HOTEL HELPDESK</title>
+  <title>WORKFROMHOME</title>
 
   <!-- Custom fonts for this template-->
   <link href="/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -39,7 +39,7 @@
         <div class="sidebar-brand-icon rotate-n-10">
           <i class="fas fa-fw fa-wrench"></i>
         </div>
-        <div class="sidebar-brand-text mx-3">HMS SERVICE</div>
+        <div class="sidebar-brand-text mx-3">WORKFROMHOME</div>
       </a>
 
       <!-- Divider -->
@@ -56,35 +56,35 @@
       <li class="nav-item">
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
           <i class="fas fa-fw fa-table"></i>
-          <span>Issues</span>
+          <span>ภาระงาน</span>
         </a>
         <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
           <div class="bg-white py-2 collapse-inner rounded">
             <!-- <h6 class="collapse-header">Custom Components:</h6> -->
-            <a class="collapse-item" href="/issues">New Issues</a>
-            <a class="collapse-item" href="/progress">Progress Issues</a>
-            <a class="collapse-item" href="/closed">Closed Issues</a>
+            <a class="collapse-item" href="/tasksnews">งานใหม่</a>
+            <a class="collapse-item" href="/tasksprogress">งานกำลังดำเนินการ</a>
+            <a class="collapse-item" href="/tasksclosed">งานที่ปิด</a>
           </div>
         </div>
       </li>
 
-      <li class="{{ 'history' == request()->path() ? 'active' : '' }} nav-item ">
+      <!-- <li class="{{ 'history' == request()->path() ? 'active' : '' }} nav-item ">
         <a class="nav-link" href="/history">
           <i class="fas fa-fw fa-cog"></i>
-          <span>History</span></a>
+          <span>ประวัติการเพิ่มแก้ไขและปิดงาน</span></a>
       </li>
 
       <li class="{{ 'checkin-checkout' == request()->path() ? 'active' : '' }} nav-item ">
         <a class="nav-link" href="/checkin-checkout">
         <i class="fas fa-fw fa-clipboard-check"></i>
-          <span>Checkin-Checkout</span></a>
+          <span>ประวัติเข้างาน-ออกงาน</span></a>
       </li>
 
       <li class="{{ 'calendar' == request()->path() ? 'active' : '' }} nav-item ">
         <a class="nav-link" href="/calendar">
           <i class="fas fa-fw fa-calendar"></i>
-          <span>Calendar</span></a>
-      </li>
+          <span>ปฏิทิน</span></a>
+      </li> -->
 
       <!-- Divider -->
       <hr class="sidebar-divider">
@@ -97,23 +97,22 @@
       <li class="{{ 'role-register' == request()->path() ? 'active' : '' }} nav-item ">
         <a class="nav-link" href="/role-register">
           <i class="fas fa-fw fa-folder"></i>
-          <span>UserManagement</span></a>
+          <span>จัดการข้อมูลพนักงาน</span></a>
       </li>
 
       <!-- Nav Item -->
       <li class="nav-item">
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities" aria-expanded="true" aria-controls="collapseUtilities">
           <i class="fas fa-fw fa-wrench"></i>
-          <span>Category</span>
+          <span>หมวดหมู่</span>
         </a>
         <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
           <div class="bg-white py-2 collapse-inner rounded">
             <!-- <h6 class="collapse-header">Custom Utilities:</h6> -->
             <!-- <a class="collapse-item" href="/tracker">Tracker</a> -->
-            <a class="collapse-item" href="/room">Room</a>
-            <a class="collapse-item" href="/status">Status</a>
-            <a class="collapse-item" href="/typeissues">TypeIssues</a>
-            <a class="collapse-item" href="/device">Device</a>
+            <a class="collapse-item" href="/statustask">ประเภทงาน</a>
+            <a class="collapse-item" href="/statususer">ประเภทพนักงาน</a>
+            <a class="collapse-item" href="/department">แผนก</a>
           </div>
         </div>
       </li>
@@ -144,7 +143,7 @@
             <i class="fa fa-bars"></i>
           </button>
 
-          <div class="text-white mx-3">HMS SYSTEM</div>
+          <div class="text-white mx-3">WORKFROMHOME</div>
 
           <!-- Topbar Navbar -->
           <ul class="navbar-nav ml-auto">
@@ -161,7 +160,7 @@
               <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
                 <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
-                  {{ __('Logout') }}
+                  {{ __('ออกจากระบบ') }}
                 </a>
 
                 <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
@@ -225,6 +224,7 @@
     <!-- Bootstrap core JavaScript-->
     <script src="/vendor/jquery/jquery.min.js"></script>
     <script src="/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
 
     <!-- Core plugin JavaScript-->
     <script src="/vendor/jquery-easing/jquery.easing.min.js"></script>

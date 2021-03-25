@@ -19,7 +19,7 @@ Web Test
                 {{ csrf_field() }}
                 {{ method_field('DELETE') }}
                 <div class="modal-body">
-                    <input type="hidden" id="delete_priority_id">
+                    <input type="hidden" id="delete_status_id">
                     <h5>Are you sure.? you want to delete this Data</h5>
                 </div>
                 <div class="modal-footer">
@@ -36,45 +36,30 @@ Web Test
     <div class="col-md-12">
         <div class="card">
             <div class="card-header">
-                <h4 class="card-title"> Room
-                    <a href="{{ url('room-create') }}" class="btn btn-primary float-right">Add</a>
+                <h4 class="card-title"> ประเภทพนักงาน
+                    <a href="{{ url('statususer-create') }}" class="btn btn-primary float-right">เพิ่มข้อมูลประเภทพนักงาน</a>
                 </h4>
             </div>
             <div class="card-body">
                 <table id="datatable" class="table">
                     <thead class="text-primary">
-                        <th>ID</th>
-                        <th>NoRoom</th>
-                        <th>TypeRoom</th>
-                        <th>Description</th>
-                        <th>Active</th>
-                        <th>EDIT</th>
+                        <th>ไอดี</th>
+                        <th>ชื่อประเภทพนักงาน</th>
+                        <th>แก้ไข</th>
                         <!-- <th>DELETE</th> -->
                     </thead>
                     <tbody>
-                        @foreach($room as $row)
+                        @foreach($statususer as $row)
                         <tr>
-                            <input type="hidden" class="prioritydelete_val" value="{{$row->Priorityid}}">
-                            <td>{{$row->Roomid}}</td>
-                            <td>{{$row->NoRoom}}</td>
-                            @if($row->TypeRoomid === 1)
-                            <td>VIP</td>
-                            @elseif($row->TypeRoomid === 0)
-                            <td>Genaral</td>
-                            @endif
+                            <!-- <input type="hidden" class="statusdelete_val" value="{{$row->Statusid}}"> -->
+                            <td>{{$row->usertypeid}}</td>
+                            <td>{{$row->typename}}</td>
                             <td>
-                                <div style="height: 30px; overflow: hidden;">
-                                    {{$row->Description}}
-                                </div>
+                                <a href="{{ url('statususer-edit/'.$row->usertypeid) }}" class="btn btn-success">แก้ไข</a>
                             </td>
-                            <td><input type="checkbox" class="toggle-class" data-id="{{$row->Roomid}}" 
-                            data-toggle="toggle" data-on="Enabled" data-off="Disabled" {{$row->Status==true ? 'checked':''}}></td>
-                            <td>
-                                <a href="{{ url('room-edit/'.$row->Roomid) }}" class="btn btn-success">EDIT</a>
-                            </td>
-                            <td>
-                                <!-- <a href="javascript:void(0)" class="btn btn-danger btn-circle deletebtn" data-toggle="modal" data-target="#deletemodalpop"><i class="fas fa-trash"></i></a> -->
-                            </td>
+                            <!-- <td>
+                                <a href="javascript:void(0)" class="btn btn-danger btn-circle deletebtn" data-toggle="modal" data-target="#deletemodalpop"><i class="fas fa-trash"></i></a>
+                            </td> -->
                         </tr>
                         @endforeach
                     </tbody>
@@ -106,38 +91,12 @@ Web Test
 
             // console.log(data);
 
-            $('#delete_priority_id').val(data[0]);
+            $('#delete_status_id').val(data[0]);
 
-            $('#delete_modal_Form').attr('action', '/priority-delete/' + data[0]);
+            $('#delete_modal_Form').attr('action', '/status-delete/' + data[0]);
 
             $('#deletemodalpop').modal('show');
         });
     });
-</script>
-
-<script>
-  $(function() {
-    $('#toggle-two').bootstrapToggle({
-      on: 'Enabled',
-      off: 'Disabled',
-      onstyle: 'primary'
-    });
-  });
-
-  $('.toggle-class').on('change',function(){
-    var Status=$(this).prop('checked')==true ? 1:0;
-    var Roomid=$(this).data('id');
-    // alert(Departmentid);
-    $.ajax({
-        type:'GET',
-        dataType:'json',
-        url:'{{route("change_StatusRoom")}}',
-        data:{'Status':Status,'Roomid':Roomid},
-        success:function(data){
-            $('.message').html('<p class="alert alert-danger">'+data.success+'</p>');
-        }
-    });
-  });
-  
 </script>
 @endsection

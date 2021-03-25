@@ -9,7 +9,7 @@
   <meta name="description" content="">
   <meta name="author" content="">
 
-  <title>HOTEL HELPDESK</title>
+  <title>WORKFROMHOME</title>
 
   <!-- Custom fonts for this template-->
   <link href="/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -40,7 +40,7 @@
         <div class="sidebar-brand-icon rotate-n-10">
           <i class="fas fa-fw fa-wrench"></i>
         </div>
-        <div class="sidebar-brand-text mx-3">HT HelpDesk</div>
+        <div class="sidebar-brand-text mx-3">WORKFROMHOME</div>
       </a>
 
       <!-- Divider -->
@@ -145,7 +145,7 @@
             <i class="fa fa-bars"></i>
           </button>
 
-          <div class="text-white mx-3">HOTEL HELPDESK</div>
+          <div class="text-white mx-3">WORKFROMHOME</div>
 
           <!-- Topbar Navbar -->
           <ul class="navbar-nav ml-auto">

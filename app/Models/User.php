@@ -10,6 +10,7 @@ use Tymon\JWTAuth\Contracts\JWTSubject;
 
 class User extends Authenticatable {
     use Notifiable;
+    public $incrementing = false;
 
     /**
      * The attributes that are mass assignable.
@@ -17,7 +18,7 @@ class User extends Authenticatable {
      * @var array
      */
     protected $fillable = [
-        'name','teamid','image','usertype','logintype','username', 'password','active'
+        'id','name','departmentid','image','usertypeid','logintype','username', 'password','active'
     ];
 
     /**

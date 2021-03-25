@@ -5,7 +5,6 @@ Web Test
 @endsection
 
 @section('content')
-
 <!-- Delete Modal -->
 <div class="modal fade" id="deletemodalpop" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
@@ -20,7 +19,7 @@ Web Test
                 {{ csrf_field() }}
                 {{ method_field('DELETE') }}
                 <div class="modal-body">
-                    <input type="hidden" id="delete_department_id">
+                    <input type="hidden" id="delete_priority_id">
                     <h5>Are you sure.? you want to delete this Data</h5>
                 </div>
                 <div class="modal-footer">
@@ -37,36 +36,30 @@ Web Test
     <div class="col-md-12">
         <div class="card">
             <div class="card-header">
-                <div id="message">
-
-                </div>
-                <h4 class="card-title"> Typeissues 
-                    <a href="{{ url('typeissues-create') }}" class="btn btn-primary float-right">Add</a>
+                <h4 class="card-title"> ประเภทงาน
+                    <a href="{{ url('statustask-create') }}" class="btn btn-primary float-right">เพิ่มข้อมูลประเภทงาน</a>
                 </h4>
             </div>
             <div class="card-body">
                 <table id="datatable" class="table">
                     <thead class="text-primary">
-                        <th>ID</th>
-                        <th>Name</th>
-                        <th>Active</th>
-                        <th>EDIT</th>
+                        <th>ไอดี</th>
+                        <th>ประเภทงาน</th>
+                        <th>แก้ไข</th>
                         <!-- <th>DELETE</th> -->
                     </thead>
                     <tbody>
-                        @foreach($typeissues as $row)
+                        @foreach($statustask as $row)
                         <tr>
-                            <input type="hidden" class="departmentdelete_val" value="{{$row->Typeissuesid}}">
-                            <td>{{$row->Typeissuesid}}</td>
-                            <td>{{$row->Typename}}</td>
-                            <td><input type="checkbox" class="toggle-class" data-id2="{{$row->Typeissuesid}}" 
-                            data-toggle="toggle" data-on="Enabled" data-off="Disabled" {{$row->Status==true ? 'checked':''}}></td>
+                            <input type="hidden" class="prioritydelete_val" value="{{$row->Priorityid}}">
+                            <td>{{$row->statustaskid}}</td>
+                            <td>{{$row->statustaskname}}</td>
                             <td>
-                                <a href="{{ url('typeissues-edit/'.$row->Typeissuesid) }}" class="btn btn-success">EDIT</a>
+                                <a href="{{ url('statustask-edit/'.$row->statustaskid) }}" class="btn btn-success">แก้ไข</a>
                             </td>
-                            <!-- <td>
-                                <a href="javascript:void(0)" class="btn btn-danger btn-circle deletebtn" data-toggle="modal" data-target="#deletemodalpop"><i class="fas fa-trash"></i></a>
-                            </td> -->
+                            <td>
+                                <!-- <a href="javascript:void(0)" class="btn btn-danger btn-circle deletebtn" data-toggle="modal" data-target="#deletemodalpop"><i class="fas fa-trash"></i></a> -->
+                            </td>
                         </tr>
                         @endforeach
                     </tbody>
@@ -86,32 +79,6 @@ Web Test
 <script src="{{ asset('js/dataTables.min.js') }}"></script>
 
 <script>
-  $(function() {
-    $('#toggle-two').bootstrapToggle({
-      on: 'Enabled',
-      off: 'Disabled',
-      onstyle: 'primary'
-    });
-  });
-
-  $('.toggle-class').on('change',function(){
-    var Status=$(this).prop('checked')==true ? 1:0;
-    var Typeissuesid=$(this).data('id2');
-    // alert(Departmentid);
-    $.ajax({
-        type:'GET',
-        dataType:'json',
-        url:'{{route("change_Status")}}',
-        data:{'Status':Status,'Typeissuesid':Typeissuesid},
-        success:function(data){
-            $('.message').html('<p class="alert alert-danger">'+data.success+'</p>');
-        }
-    });
-  });
-  
-</script>
-
-<script>
     $(document).ready(function() {
         $('#datatable').DataTable();
 
@@ -124,12 +91,38 @@ Web Test
 
             // console.log(data);
 
-            $('#delete_department_id').val(data[0]);
+            $('#delete_priority_id').val(data[0]);
 
-            $('#delete_modal_Form').attr('action', '/department-delete/' + data[0]);
+            $('#delete_modal_Form').attr('action', '/priority-delete/' + data[0]);
 
             $('#deletemodalpop').modal('show');
         });
     });
+</script>
+
+<script>
+  $(function() {
+    $('#toggle-two').bootstrapToggle({
+      on: 'Enabled',
+      off: 'Disabled',
+      onstyle: 'primary'
+    });
+  });
+
+  $('.toggle-class').on('change',function(){
+    var Status=$(this).prop('checked')==true ? 1:0;
+    var Roomid=$(this).data('id');
+    // alert(Departmentid);
+    $.ajax({
+        type:'GET',
+        dataType:'json',
+        url:'{{route("change_StatusRoom")}}',
+        data:{'Status':Status,'Roomid':Roomid},
+        success:function(data){
+            $('.message').html('<p class="alert alert-danger">'+data.success+'</p>');
+        }
+    });
+  });
+  
 </script>
 @endsection

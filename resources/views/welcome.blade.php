@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>HMS SERVICE</title>
+    <title>WORKFROMHOME</title>
 
     <!-- Fonts -->
     <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
@@ -71,7 +71,7 @@
         @if (Route::has('login'))
         <div class="top-right links">
             @auth
-            <a href="{{ url('/home') }}">Home</a>
+            <a href="{{ url('/home') }}">หน้าแรก</a>
             <a href="{{ route('logout') }}" onclick="event.preventDefault();
             document.getElementById('logout-form').submit();">
                 {{ __('Logout') }}
@@ -80,7 +80,7 @@
                 @csrf
             </form>
             @else
-            <a href="{{ route('login') }}">Login</a>
+            <a href="{{ route('login') }}">เข้าสู่ระบบ</a>
 
             <!-- <a href="{{url('/apk/1.0.5.apk')}}">Dowload App</a> -->
             @endauth
@@ -89,7 +89,7 @@
 
         <div class="content">
             <div class="title m-b-md">
-            HMS SERVICE
+            WORKFROMHOME
             </div>
         </div>
     </div>

@@ -8,17 +8,17 @@ use App\Models\TypeIssues;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 
-class TypeIssuesController extends Controller
+class DepartmentController extends Controller
 {
     public function index()
     {
-        $typeissues = TypeIssues::all();
-        return view('admin.typeissues.index', compact('typeissues'));
+        $department = Department::all();
+        return view('admin.department.index', compact('department'));
     }
 
     public function create()
     {
-        return view('admin.typeissues.create');
+        return view('admin.department.create');
     }
 
     public function store(Request $request)
@@ -37,22 +37,22 @@ class TypeIssuesController extends Controller
         //     ]
         // );
 
-        $typeissues = new TypeIssues();
-        $typeissues->Typename = $request->input('Typename');
+        $department = new Department();
+        $department->dmname = $request->input('dmname');
         // $typeissues->DmCode = $request->input('DmCode');
-        $typeissues->save();
+        $department->save();
 
         Session::flash('statuscode', 'success');
-        return redirect('/typeissues')->with('status', 'Data Added for Typeissues Successfully');
+        return redirect('/department')->with('status', 'บันทึกข้อมูลแผนกสำเร็จ');
     }
 
-    public function edit($Typeissuesid)
+    public function edit($departmentid)
     {
-        $typeissues = Typeissues::find($Typeissuesid);
-        return view('admin.typeissues.edit', compact('typeissues'));
+        $department = Department::find($departmentid);
+        return view('admin.department.edit', compact('department'));
     }
 
-    public function update(Request $request, $Typeissuesid)
+    public function update(Request $request, $departmentid)
     {
         // $this->validate(
         //     $request,
@@ -67,12 +67,12 @@ class TypeIssuesController extends Controller
         //     ]
         // );
 
-        $typeissues = Typeissues::find($Typeissuesid);
-        $typeissues->Typename = $request->input('Typename');
-        $typeissues->update();
+        $department = Department::find($departmentid);
+        $department->dmname = $request->input('dmname');
+        $department->update();
 
         Session::flash('statuscode', 'success');
-        return redirect('/typeissues')->with('status', 'Data Update for typeissues Successfully');
+        return redirect('/department')->with('status', 'อัพเดทข้อมูลแผนกสำเร็จ');
     }
 
     public function delete($Typeissuesid)
@@ -80,15 +80,15 @@ class TypeIssuesController extends Controller
         $typeissues = Department::findOrFail($Typeissuesid);
         $typeissues->delete();
         Session::flash('statuscode', 'error');
-        return redirect('/typeissues')->with('danger', 'Your typeissues is Deleted');
+        return redirect('/department')->with('danger', 'Your typeissues is Deleted');
     }
 
     public function changStatus(Request $request)
     {
-        $typeissues = Typeissues::find($request->Typeissuesid);
-        $typeissues->Status = $request->Status;
-        $typeissues->update();
+        $department = Department::find($request->departmentid);
+        $department->status = $request->Status;
+        $department->update();
         // printf($request->Typeissuesid);
-        return response()->json(['success' => 'Status Change successfully']);
+        return response()->json(['success' => 'อัพเดทข้อมูลแผนกสำเร็จ']);
     }
 }
